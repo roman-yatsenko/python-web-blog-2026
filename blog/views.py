@@ -1,11 +1,20 @@
-from django.http import Http404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404
 
 from .models import Post
 
 
 def post_list(request):
-    posts = Post.published.all()
+    post_list = Post.published.all()
+    # Посторінкове розбиття з 2 постами на сторінку
+    paginator = Paginator(post_list, 2)
+    page_number = request.GET.get('page', 1)
+    try:
+        posts = paginator.page(page_number)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
     return render(request, 'blog/post/list.html', {'posts': posts})
 
 
