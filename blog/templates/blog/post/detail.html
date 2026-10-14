@@ -8,4 +8,7 @@
         <i>📅 {{ post.publish }} 👤 {{ post.author }}</i>
     </p>
     {{ post.body|linebreaks }}
+    <p>
+        <a href="{% url 'blog:post_share' post.id %}"><b>Пошарити пост</b></a>
+    </p>
 {% endblock content %}

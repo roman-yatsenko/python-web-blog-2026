@@ -1,0 +1,21 @@
+{% extends "blog/base.html" %}
+
+{% block title %}
+    Пошарити пост
+{% endblock %}
+
+{% block content %}
+    <section>
+        {% if sent %}
+            <h2>E-mail було успішно надіслано</h2>
+            <p>{{ post.title }} було успішно надіслано {{ form.cleaned_data.to }}.</p>
+        {% else %}
+            <form method="post">
+                <header>Пошарити "{{ post.title }}" електронною поштою</header>
+                {{ form.as_p }}
+                <button type="submit">Надіслати e-mail</button>
+                {% csrf_token %}
+            </form>
+        {% endif %}
+    </section>
+{% endblock content %}
