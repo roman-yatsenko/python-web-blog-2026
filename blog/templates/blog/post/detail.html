@@ -11,4 +11,19 @@
     <p>
         <a href="{% url 'blog:post_share' post.id %}"><b>Пошарити пост</b></a>
     </p>
+    {% with comments.count as total_comments %}
+        <h3>Коментарів: {{ total_comments }}</h3>
+    {% endwith %}
+    {% for comment in comments %}
+        <article>
+            <h4>Коментар №{{ forloop.counter }} від {{ comment.name }}</h4>
+            <aside>
+                {{ comment.body|linebreaks }}
+            </aside>
+            <p><i>{{ comment.created }}</i></p>
+        </article>
+    {% empty %}
+        <h4>Коментарі відсутні</h4>
+    {% endfor %}
+    {% include "blog/post/includes/comment_form.html" %}
 {% endblock content %}
