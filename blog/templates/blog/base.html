@@ -10,6 +10,14 @@
 </head>
 <body>
     <header>
+        <nav>
+            <a href="/"><img alt="Logo" src="https://via.placeholder.com/200x70?text=Logo" height="70"></a>
+            <ul>
+                <li><a href="#">Останні пости</a>
+                    {% show_latest_posts 3 %}
+                </li>
+            </ul>
+        </nav>
         <h1>Мій блог</h1>
     </header>
     <main>
